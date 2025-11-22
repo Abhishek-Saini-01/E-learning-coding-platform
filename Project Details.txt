@@ -1,0 +1,3 @@
+codeRabbit
+suppressHydrationWarning
+next-themes provider shadcn-ui
