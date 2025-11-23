@@ -2,3 +2,6 @@ codeRabbit
 suppressHydrationWarning
 next-themes provider shadcn-ui
 clerk auth
+github  create pull request
+
+postgress and dizzel orm
