@@ -1,4 +1,4 @@
-import { integer, pgTable, varchar } from "drizzle-orm/pg-core";
+import { integer, json, pgTable, varchar } from "drizzle-orm/pg-core";
 
 export const usersTable = pgTable("users", {
     id: integer().primaryKey().generatedAlwaysAsIdentity(),
@@ -18,3 +18,11 @@ export const courseTable = pgTable("courses", {
     tags: varchar()
 });
 
+export const courseChaptersTable = pgTable("courseChapters", {
+    id: integer().primaryKey().generatedAlwaysAsIdentity(),
+    chapterId: varchar(),
+    courseId: varchar().notNull(),
+    name: varchar().notNull(),
+    desc: varchar(),
+    exercises: json(),
+});
