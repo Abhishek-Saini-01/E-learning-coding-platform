@@ -15,7 +15,7 @@ const UpgradeToPro = () => {
             <h2 className="text-3xl font-game">Upgrade to Pro</h2>
             <p className="font-game text-gray-500 text-xl text-center">Join Pro Membership and Get All course and access</p>
             <Link href="/pricing">
-                <Button className="font-game" variant="pixel" size="lg">
+                <Button className="font-game text-2xl" variant="pixel" size="lg">
                     Upgrade
                 </Button>
             </Link>
