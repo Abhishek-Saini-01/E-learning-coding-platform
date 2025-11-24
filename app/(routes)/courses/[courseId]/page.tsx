@@ -22,6 +22,10 @@ export type CourseChapterType = {
     desc: string;
     exercises: ChapterExerciseType[];
 }
+type CourseEnrolledInfoType = {
+    enrolledDate: any;
+    xpEarned: number
+}
 export type CourseDetailsType = {
     id: number;
     courseId: string;
@@ -31,6 +35,8 @@ export type CourseDetailsType = {
     level: string;
     tags: string;
     chapters?: CourseChapterType[];
+    userEnrolled?: boolean;
+    courseEnrolledInfo: CourseEnrolledInfoType;
 }
 
 const CourseDetails = () => {
@@ -59,6 +65,7 @@ const CourseDetails = () => {
             <CourseDetailsBanner
                 loading={loading}
                 courseDetails={courseDetails}
+                refreshData={() => getCourseDetails()}
             />
             <div className="grid grid-cols-3 p-10 md:px-24 lg:px-36 gap-7">
                 <div className="col-span-2">

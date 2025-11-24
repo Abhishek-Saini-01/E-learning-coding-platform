@@ -31,6 +31,13 @@ const CourseStatus = ({
     useEffect(() => {
         courseDetails && GetCounts();
     }, [courseDetails])
+
+    const updateProgress = (currentValue?: number, totalValue?: number) => {
+        if (currentValue && totalValue) {
+            return Math.round((currentValue / totalValue) * 100);
+        }
+        return 0;
+    }
     return (
         <div className='font-game p-4 border-4 rounded-2xl w-full'>
             <h2 className='text-3xl'>Course Progress</h2>
@@ -57,9 +64,10 @@ const CourseStatus = ({
                 />
                 <div className="w-full">
                     <h2 className='text-2xl flex justify-between items-center'>XP Earned
-                        <span className='text-gray-400'>10/{counts?.totalXP}</span>
+                        <span className='text-gray-400'>{courseDetails?.courseEnrolledInfo.xpEarned}/{counts?.totalXP}</span>
                     </h2>
-                    <Progress value={17} className='mt-2' />
+
+                    <Progress value={updateProgress(courseDetails?.courseEnrolledInfo.xpEarned, counts?.totalXP)} className='mt-2' />
                 </div>
             </div>
         </div>
