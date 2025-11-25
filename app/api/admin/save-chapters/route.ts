@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 const DATA = [
     {
-        "id": "1",
+        "id": 1,
         "name": "Introduction to HTML",
         "desc": "Discover the foundation of every webpage and learn how HTML shapes the digital world.",
         "exercises": [
@@ -17,7 +17,7 @@ const DATA = [
         ]
     },
     {
-        "id": "2",
+        "id": 2,
         "name": "HTML Boilerplate",
         "desc": "Understand the core structure that every HTML document begins with.",
         "exercises": [
@@ -30,7 +30,7 @@ const DATA = [
         ]
     },
     {
-        "id": "3",
+        "id": 3,
         "name": "Head & Body Tags",
         "desc": "Learn the difference between behind-the-scenes metadata and visible page content.",
         "exercises": [
@@ -43,7 +43,7 @@ const DATA = [
         ]
     },
     {
-        "id": "4",
+        "id": 4,
         "name": "Text Formatting",
         "desc": "Format your content with headings, paragraphs, bold, italic, and more.",
         "exercises": [
@@ -56,7 +56,7 @@ const DATA = [
         ]
     },
     {
-        "id": "5",
+        "id": 5,
         "name": "Links & Navigation",
         "desc": "Create portals between pages and build simple navigation.",
         "exercises": [
@@ -69,7 +69,7 @@ const DATA = [
         ]
     },
     {
-        "id": "6",
+        "id": 6,
         "name": "Images",
         "desc": "Display images, control sizing, and optimize accessibility.",
         "exercises": [
@@ -82,7 +82,7 @@ const DATA = [
         ]
     },
     {
-        "id": "7",
+        "id": 7,
         "name": "Lists",
         "desc": "Structure grouped information using ordered, unordered, and description lists.",
         "exercises": [
@@ -95,7 +95,7 @@ const DATA = [
         ]
     },
     {
-        "id": "8",
+        "id": 8,
         "name": "Tables",
         "desc": "Represent information in structured grid format.",
         "exercises": [
@@ -108,7 +108,7 @@ const DATA = [
         ]
     },
     {
-        "id": "9",
+        "id": 9,
         "name": "Forms Basics",
         "desc": "Collect user input using form controls like input, labels, and buttons.",
         "exercises": [
@@ -121,7 +121,7 @@ const DATA = [
         ]
     },
     {
-        "id": "10",
+        "id": 10,
         "name": "Semantic HTML",
         "desc": "Use meaningful HTML elements to improve page structure and accessibility.",
         "exercises": [
@@ -134,7 +134,7 @@ const DATA = [
         ]
     },
     {
-        "id": "11",
+        "id": 11,
         "name": "Audio & Video",
         "desc": "Add multimedia components for richer experiences.",
         "exercises": [
@@ -147,7 +147,7 @@ const DATA = [
         ]
     },
     {
-        "id": "12",
+        "id": 12,
         "name": "HTML Best Practices",
         "desc": "Write clear, clean, and accessible HTML optimized for real-world use.",
         "exercises": [
@@ -165,7 +165,7 @@ const DATA = [
 export async function GET(req: NextRequest) {
     // DATA.forEach(async (item) => {
     //     await db.insert(courseChaptersTable).values({
-    //         courseId: "2", //Change Course ID depends on course info,
+    //         courseId: 2, //Change Course ID depends on course info,
     //         desc: item?.desc,
     //         exercises: item.exercises,
     //         name: item?.name,

@@ -11,7 +11,7 @@ export const usersTable = pgTable("users", {
 
 export const courseTable = pgTable("courses", {
     id: integer().primaryKey().generatedAlwaysAsIdentity(),
-    courseId: varchar().notNull().unique(),
+    courseId: integer().notNull().unique(),
     title: varchar({ length: 255 }).notNull(),
     desc: varchar().notNull(),
     bannerImage: varchar().notNull(),
@@ -21,8 +21,8 @@ export const courseTable = pgTable("courses", {
 
 export const courseChaptersTable = pgTable("courseChapters", {
     id: integer().primaryKey().generatedAlwaysAsIdentity(),
-    chapterId: varchar(),
-    courseId: varchar().notNull(),
+    chapterId: integer(),
+    courseId: integer().notNull(),
     name: varchar().notNull(),
     desc: varchar(),
     exercises: json(),
@@ -31,7 +31,15 @@ export const courseChaptersTable = pgTable("courseChapters", {
 export const userEnrolledCoursesTable = pgTable("userEnrolledCourses", {
     id: integer().primaryKey().generatedAlwaysAsIdentity(),
     userId: varchar().notNull(),
-    courseId: varchar().notNull(),
+    courseId: integer().notNull(),
     enrolledDate: timestamp().defaultNow(),
     xpEarned: integer().default(0),
+})
+
+export const userCompletedExerciseTable = pgTable("userCompletedExercise", {
+    id: integer().primaryKey().generatedAlwaysAsIdentity(),
+    userId: varchar().notNull(),
+    courseId: integer().notNull(),
+    chapterId: integer().notNull(),
+    exerciseId: integer().notNull(),
 })

@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 
 type CourseType = {
     id: number;
-    courseId: string;
+    courseId: number;
     title: string;
     desc: string;
     bannerImage: string;
