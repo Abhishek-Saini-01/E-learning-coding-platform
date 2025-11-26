@@ -22,11 +22,11 @@ export type CourseChapterType = {
     desc: string;
     exercises: ChapterExerciseType[];
 }
-type CourseEnrolledInfoType = {
+export type CourseEnrolledInfoType = {
     enrolledDate: any;
     xpEarned: number
 }
-type CompletedExercisesType = {
+export type CompletedExercisesType = {
     courseId: number;
     chapterId: number;
     exerciseId: number;
