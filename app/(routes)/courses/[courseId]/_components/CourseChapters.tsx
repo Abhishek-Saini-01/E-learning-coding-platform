@@ -10,6 +10,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import Link from 'next/link';
+import { useAuth } from '@clerk/nextjs';
 
 type CourseChaptersProps = {
     loading: boolean;
@@ -20,7 +21,8 @@ const CourseChapters = ({
     courseDetails
 }: CourseChaptersProps) => {
 
-
+    const { has } = useAuth();
+    const hasUnlimitedAccess = has && has({ plan: "unlimited" })
     const EnableExercise = (
         chapterIndex: number,
         exerciseIndex: number,
@@ -69,9 +71,14 @@ const CourseChapters = ({
                         <Accordion type="single" collapsible key={chapter.chapterId}>
                             <AccordionItem value="item-1">
                                 <AccordionTrigger className='p-3 hover:bg-zinc-800 font-game text-4xl'>
-                                    <div className='flex gap-10'>
-                                        <h2 className='h-10 w-10 bg-zinc-800 rounded text-center'>{index + 1}</h2>
-                                        <h2> {chapter.name}</h2>
+                                    <div className='flex items-center justify-between w-full'>
+                                        <div className='flex gap-10'>
+                                            <h2 className='h-10 w-10 bg-zinc-800 rounded text-center'>{index + 1}</h2>
+                                            <h2> {chapter.name}</h2>
+                                        </div>
+                                        {!hasUnlimitedAccess && index >= 2 && (
+                                            <h2 className='font-game text-3xl text-yellow-400'>Pro</h2>
+                                        )}
                                     </div>
 
                                 </AccordionTrigger>
@@ -89,7 +96,11 @@ const CourseChapters = ({
                                                         <Link href={`/courses/${courseDetails?.courseId}/${chapter.chapterId}/${exercise.slug}`}>
                                                             <Button variant="pixel" className='bg-green-600'>Completed</Button>
                                                         </Link>
-                                                    ) : courseDetails.userEnrolled ? (
+                                                    ) : courseDetails.userEnrolled && (!hasUnlimitedAccess && index < 2) ? (
+                                                        <Link href={`/courses/${courseDetails?.courseId}/${chapter.chapterId}/${exercise.slug}`}>
+                                                            <Button variant="pixel" >{exercise.xp} XP</Button>
+                                                        </Link>
+                                                    ) : hasUnlimitedAccess && courseDetails.userEnrolled ? (
                                                         <Link href={`/courses/${courseDetails?.courseId}/${chapter.chapterId}/${exercise.slug}`}>
                                                             <Button variant="pixel" >{exercise.xp} XP</Button>
                                                         </Link>
