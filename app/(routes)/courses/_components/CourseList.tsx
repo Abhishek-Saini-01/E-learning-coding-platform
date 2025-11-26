@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-type CourseType = {
+export type CourseType = {
     id: number;
     courseId: number;
     title: string;
@@ -14,8 +14,14 @@ type CourseType = {
     bannerImage: string;
     level: string;
     tags: string;
+    editorType: string;
 }
-const CourseList = () => {
+
+type CourseListProps = {
+    smallerCard?: boolean;
+    maxLimit?: number
+}
+const CourseList = ({ smallerCard = false, maxLimit }: CourseListProps) => {
     const [courseList, setCourseList] = useState<CourseType[]>([]);
     const [loading, setLoading] = useState(false);
 
@@ -23,7 +29,7 @@ const CourseList = () => {
         try {
             setLoading(true);
             const res = await axios.get('/api/course');
-            console.log(res.data);
+            // console.log(res.data);
             setCourseList(res.data);
         } catch (error) {
             console.log("[COURSES_GET_ERROR]", error);
@@ -37,7 +43,7 @@ const CourseList = () => {
     }, [])
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-3">
-            {courseList.map((course) => (
+            {courseList.map((course, index) => maxLimit && maxLimit > index && (
                 <Link href={`/courses/${course.courseId}`} key={course.id}>
                     <div className="border-4 rounded-xl hover:bg-zinc-900 cursor-pointer">
                         <Image
@@ -45,7 +51,7 @@ const CourseList = () => {
                             alt={course.title}
                             width={400}
                             height={400}
-                            className="w-full h-[200px] object-cover rounded-t-lg"
+                            className={`w-full ${smallerCard ? "h-[120]" : "h-[200px]"} object-cover rounded-t-lg`}
                         />
 
                         <div className="p-4">

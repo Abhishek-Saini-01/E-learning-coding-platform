@@ -5,6 +5,7 @@ import ExploreMore from './_components/ExploreMore'
 import InviteFriend from './_components/InviteFriend'
 import UserStatus from './_components/UserStatus'
 import UpgradeToPro from './_components/UpgradeToPro'
+import ExploreMoreCourse from './_components/ExploreMoreCourse'
 
 const Dashboard = () => {
     return (
@@ -13,6 +14,7 @@ const Dashboard = () => {
                 <div className="col-span-2">
                     <WelcomeBanner />
                     <EnrolledCourses />
+                    <ExploreMoreCourse />
                     <ExploreMore />
                     <InviteFriend />
                 </div>

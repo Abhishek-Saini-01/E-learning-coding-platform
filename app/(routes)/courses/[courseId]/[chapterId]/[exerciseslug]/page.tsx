@@ -36,7 +36,8 @@ export type CourseExerciseDataType = {
     name: string;
     exercises: ChapterExerciseType[];
     exerciseData: ExerciseDataType;
-    completedExercise: CompletedExercisesType[]
+    completedExercise: CompletedExercisesType[];
+    editorType: string;
 }
 const Playground = () => {
     const { courseId, chapterId, exerciseslug } = useParams();

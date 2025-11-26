@@ -58,7 +58,8 @@ const CodeEditor = ({
     return (
         <div>
             <SandpackProvider
-                template="static"
+                //@ts-ignore
+                template={courseExerciseData?.editorType ?? "static"}
                 theme={"auto"}
                 style={{ height: '100vh' }}
                 files={courseExerciseData?.exerciseData?.exerciseContent.starterCode}
