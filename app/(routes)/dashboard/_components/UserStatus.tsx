@@ -1,10 +1,12 @@
 "use client"
+import { UserDetailsContext } from '@/context/UserDetailsContext'
 import { useUser } from '@clerk/nextjs'
 import Image from 'next/image'
-import React, { use } from 'react'
+import React, { use, useContext } from 'react'
 
 const UserStatus = () => {
     const { user } = useUser();
+    const { userDetails, setUserDetails } = useContext(UserDetailsContext);
     return (
         <div className='p-4 border-4 rounded-2xl'>
             <div className='flex gap-3 items-center'>
@@ -25,7 +27,7 @@ const UserStatus = () => {
                         height={35}
                     />
                     <div>
-                        <h2 className='font-game text-3xl'>20</h2>
+                        <h2 className='font-game text-3xl'>{userDetails?.points}</h2>
                         <h2 className='font-game text-xl text-gray-500'>Total Rewards</h2>
                     </div>
                 </div>

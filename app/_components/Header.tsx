@@ -15,6 +15,9 @@ import {
 import { UserButton, useUser } from '@clerk/nextjs';
 import Link from 'next/link';
 import { useParams, usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { CourseType } from '../(routes)/courses/_components/CourseList';
 
 
 
@@ -82,7 +85,23 @@ const Header = () => {
     const { user } = useUser()
     const path = usePathname();
     const { exerciseslug } = useParams();
+    const [courseList, setCourseList] = useState<CourseType[]>([]);
+    const [loading, setLoading] = useState(false);
 
+    const getAllCourses = async () => {
+        try {
+            setLoading(true);
+            const res = await axios.get('/api/course');
+            setCourseList(res.data);
+        } catch (error) {
+            console.log("[COURSES_GET_ERROR]", error);
+        } finally {
+            setLoading(false);
+        }
+    }
+    useEffect(() => {
+        getAllCourses();
+    }, [])
     return (
         <div className='p-4 max-w-7xl flex justify-between items-center w-full'>
             <div className='flex gap-2 items-center'>
@@ -101,11 +120,13 @@ const Header = () => {
                             <NavigationMenuTrigger>Courses</NavigationMenuTrigger>
                             <NavigationMenuContent>
                                 <ul className='grid md:grid-cols-2 gap-2 sm:w-[400px] md:w-[500px] lg:w-[600px]'>
-                                    {courses.map((course, index) => (
-                                        <div key={index} className="p-2 hover:bg-accent rounded-md cursor-pointer">
-                                            <h2>{course.name}</h2>
-                                            <p className='text-sm text-gray-500 font-medium'>{course.desc}</p>
-                                        </div>
+                                    {courseList.map((course, index) => (
+                                        <Link href={`/courses/${course.courseId}`} key={index}>
+                                            <div className="p-2 hover:bg-accent rounded-md cursor-pointer">
+                                                <h2>{course.title}</h2>
+                                                <p className='text-sm text-gray-500 font-medium'>{course.desc}</p>
+                                            </div>
+                                        </Link>
                                     ))}
                                 </ul>
                             </NavigationMenuContent>
