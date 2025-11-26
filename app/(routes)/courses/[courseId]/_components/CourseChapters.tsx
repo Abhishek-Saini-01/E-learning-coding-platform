@@ -9,6 +9,7 @@ import {
 import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import Link from 'next/link';
 
 type CourseChaptersProps = {
     loading: boolean;
@@ -83,10 +84,10 @@ const CourseChapters = ({
                                                     <h2 className='text-3xl'>{exercise.name}</h2>
                                                 </div>
                                                 {
-                                                }
-                                                {
                                                     EnableExercise(index, indexExc, chapter.exercises.length) ? (
-                                                        <Button variant="pixel" >{exercise.xp} XP</Button>
+                                                        <Link href={`/courses/${courseDetails?.courseId}/${chapter.chapterId}/${exercise.slug}`}>
+                                                            <Button variant="pixel" >{exercise.xp} XP</Button>
+                                                        </Link>
                                                     ) : isExceriseCompleted(chapter.chapterId, indexExc + 1) ? (
                                                         <Button variant="pixel" className='bg-green-600'>Completed</Button>
                                                     ) : (
