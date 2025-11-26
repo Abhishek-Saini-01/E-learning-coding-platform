@@ -83,13 +83,16 @@ const CourseChapters = ({
                                                     <h2 className='text-3xl'>Exercise {index * chapter.exercises.length + indexExc + 1}</h2>
                                                     <h2 className='text-3xl'>{exercise.name}</h2>
                                                 </div>
+
                                                 {
-                                                    EnableExercise(index, indexExc, chapter.exercises.length) ? (
+                                                    isExceriseCompleted(chapter.chapterId, indexExc + 1) ? (
+                                                        <Link href={`/courses/${courseDetails?.courseId}/${chapter.chapterId}/${exercise.slug}`}>
+                                                            <Button variant="pixel" className='bg-green-600'>Completed</Button>
+                                                        </Link>
+                                                    ) : courseDetails.userEnrolled ? (
                                                         <Link href={`/courses/${courseDetails?.courseId}/${chapter.chapterId}/${exercise.slug}`}>
                                                             <Button variant="pixel" >{exercise.xp} XP</Button>
                                                         </Link>
-                                                    ) : isExceriseCompleted(chapter.chapterId, indexExc + 1) ? (
-                                                        <Button variant="pixel" className='bg-green-600'>Completed</Button>
                                                     ) : (
                                                         <Tooltip>
                                                             <TooltipTrigger asChild>
