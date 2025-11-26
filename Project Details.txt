@@ -5,3 +5,35 @@ clerk auth
 github  create pull request
 
 postgress and dizzel orm
+
+prompt:
+
+Based on ABove Chapters and Exercise Topic, Generate Details content in following format 
+{
+courseId:number,
+exerciseId:slug,
+exerciseName:string,
+chapterId:number
+exercisesContent:
+    {
+        content:< Explanation about topic in HTML format Only body Tag, Make sure to explian each topic
+         in details so user can learn. Also make sure it will be game like explianation, Brifly Explain , minimum 12 lines, Give result in HTML body tags
+         with inline css styling>
+        task:<task bases on content and chapter explination, Write in HTML Format format Only body Tag>
+        hint:<Write in HTML Format format Only body Tag>,
+        starterCode:start code for given task,in this format: {
+            "/filename": <startCode forv this file, Default code base on exercise. Must add the default code>,
+        }
+        regex:<output Regex to check if user enter html is corrct or not>
+        output:'output result to match user output',
+        hintXp:number <depends on the difficuly level add hintXp which we can deduct from user earned xp, Range between 30 to 80>
+        
+    }
+
+}
+
+Do not add '/n'. Also if there is a code, make sure to wrap inside <code></code> tag except for starterCode.
+Do not add any text color for any text except for links. Make sure to use dark theme for content, No background. Make sure starterCode not just gve me in one line, It should hage prper intend and format
+
+[{"name":"Explore the Web Skeleton","slug":"explore-the-web-skeleton","xp":20,"difficulty":"easy"},{"name":"Build Your Base Camp","slug":"build-your-base-camp","xp":25,"difficulty":"easy"},{"name":"Name Your World","slug":"name-your-world","xp":15,"difficulty":"easy"},{"name":"Break & Repair","slug":"break-and-repair","xp":20,"difficulty":"easy"},{"name":"HTML Detective","slug":"html-detective","xp":20,"difficulty":"easy"},{"name":"Element Collector","slug":"element-collector","xp":25,"difficulty":"easy"}]
+

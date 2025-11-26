@@ -9,6 +9,7 @@ import {
 import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import Link from 'next/link';
 
 type CourseChaptersProps = {
     loading: boolean;
@@ -18,6 +19,41 @@ const CourseChapters = ({
     loading,
     courseDetails
 }: CourseChaptersProps) => {
+
+
+    const EnableExercise = (
+        chapterIndex: number,
+        exerciseIndex: number,
+        chapterExercisesLength: number
+    ) => {
+        const completed = courseDetails?.completedExercises;
+
+        // If nothing is completed, enable FIRST exercise ONLY
+        if (!completed || completed.length === 0) {
+            return chapterIndex === 0 && exerciseIndex === 0;
+        }
+
+        // last completed
+        const last = completed[completed.length - 1];
+
+        // Convert to global exercise number
+        const currentExerciseNumber =
+            chapterIndex * chapterExercisesLength + exerciseIndex + 1;
+
+        const lastCompletedNumber =
+            (last.chapterId - 1) * chapterExercisesLength + last.exerciseId;
+
+        return currentExerciseNumber === lastCompletedNumber + 2;
+    };
+
+
+
+    const isExceriseCompleted = (chapterId: number, exerciseId: number) => {
+        const completedChapters = courseDetails?.completedExercises;
+
+        const completedChapter = completedChapters?.find(item => item.chapterId === chapterId && item.exerciseId === exerciseId);
+        return completedChapter ? true : false;
+    }
     return (
         <div>
             {courseDetails?.chapters?.length === 0 ? (
@@ -47,15 +83,24 @@ const CourseChapters = ({
                                                     <h2 className='text-3xl'>Exercise {index * chapter.exercises.length + indexExc + 1}</h2>
                                                     <h2 className='text-3xl'>{exercise.name}</h2>
                                                 </div>
-                                                {/* <Button variant="pixel">{exercise.xp} XP</Button> */}
-                                                <Tooltip>
-                                                    <TooltipTrigger asChild>
-                                                        <Button variant="pixelDisabled">???</Button>
-                                                    </TooltipTrigger>
-                                                    <TooltipContent>
-                                                        <p className='font-game text-lg'>Please Enroll first </p>
-                                                    </TooltipContent>
-                                                </Tooltip>
+                                                {
+                                                    EnableExercise(index, indexExc, chapter.exercises.length) ? (
+                                                        <Link href={`/courses/${courseDetails?.courseId}/${chapter.chapterId}/${exercise.slug}`}>
+                                                            <Button variant="pixel" >{exercise.xp} XP</Button>
+                                                        </Link>
+                                                    ) : isExceriseCompleted(chapter.chapterId, indexExc + 1) ? (
+                                                        <Button variant="pixel" className='bg-green-600'>Completed</Button>
+                                                    ) : (
+                                                        <Tooltip>
+                                                            <TooltipTrigger asChild>
+                                                                <Button variant="pixelDisabled">???</Button>
+                                                            </TooltipTrigger>
+                                                            <TooltipContent>
+                                                                <p className='font-game text-lg'>Please Enroll first </p>
+                                                            </TooltipContent>
+                                                        </Tooltip>
+                                                    )
+                                                }
                                             </div>
                                         ))}
                                     </div>

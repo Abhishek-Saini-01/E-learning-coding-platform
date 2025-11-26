@@ -16,8 +16,8 @@ export type ChapterExerciseType = {
 }
 export type CourseChapterType = {
     id: number;
-    chapterId: string;
-    courseId: string;
+    chapterId: number;
+    courseId: number;
     name: string
     desc: string;
     exercises: ChapterExerciseType[];
@@ -26,9 +26,14 @@ type CourseEnrolledInfoType = {
     enrolledDate: any;
     xpEarned: number
 }
+type CompletedExercisesType = {
+    courseId: number;
+    chapterId: number;
+    exerciseId: number;
+}
 export type CourseDetailsType = {
     id: number;
-    courseId: string;
+    courseId: number;
     title: string;
     desc: string;
     bannerImage: string;
@@ -37,6 +42,7 @@ export type CourseDetailsType = {
     chapters?: CourseChapterType[];
     userEnrolled?: boolean;
     courseEnrolledInfo: CourseEnrolledInfoType;
+    completedExercises?: CompletedExercisesType[]
 }
 
 const CourseDetails = () => {

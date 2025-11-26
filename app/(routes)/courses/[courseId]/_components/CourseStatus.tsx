@@ -50,9 +50,9 @@ const CourseStatus = ({
                 />
                 <div className="w-full">
                     <h2 className='text-2xl flex justify-between items-center'>Excerises
-                        <span className='text-gray-400'>1/{counts?.totalExercises}</span>
+                        <span className='text-gray-400'>{courseDetails?.completedExercises?.length}/{counts?.totalExercises}</span>
                     </h2>
-                    <Progress value={37} className='mt-2' />
+                    <Progress value={updateProgress(courseDetails?.completedExercises?.length, counts?.totalExercises)} className='mt-2' />
                 </div>
             </div>
             <div className="flex items-center gap-5 mt-4 w-full">
@@ -64,10 +64,10 @@ const CourseStatus = ({
                 />
                 <div className="w-full">
                     <h2 className='text-2xl flex justify-between items-center'>XP Earned
-                        <span className='text-gray-400'>{courseDetails?.courseEnrolledInfo.xpEarned}/{counts?.totalXP}</span>
+                        <span className='text-gray-400'>{courseDetails?.courseEnrolledInfo ? courseDetails?.courseEnrolledInfo.xpEarned : 0}/{counts?.totalXP}</span>
                     </h2>
 
-                    <Progress value={updateProgress(courseDetails?.courseEnrolledInfo.xpEarned, counts?.totalXP)} className='mt-2' />
+                    <Progress value={updateProgress(courseDetails?.courseEnrolledInfo ? courseDetails?.courseEnrolledInfo.xpEarned : 0, counts?.totalXP)} className='mt-2' />
                 </div>
             </div>
         </div>
