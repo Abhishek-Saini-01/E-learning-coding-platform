@@ -7,6 +7,7 @@ import CourseChapters from "./_components/CourseChapters";
 import CourseStatus from "./_components/CourseStatus";
 import UpgradeToPro from "../../dashboard/_components/UpgradeToPro";
 import CommunityHelp from "./_components/CommunityHelp";
+import { useAuth } from "@clerk/nextjs";
 
 export type ChapterExerciseType = {
     name: string;
@@ -46,6 +47,8 @@ export type CourseDetailsType = {
 }
 
 const CourseDetails = () => {
+    const { has } = useAuth();
+    const hasUnlimitedAccess = has && has({ plan: "unlimited" })
     const { courseId } = useParams();
     const [courseDetails, setCourseDetails] = useState<CourseDetailsType>();
     const [loading, setLoading] = useState(false);
@@ -82,7 +85,7 @@ const CourseDetails = () => {
                 </div>
                 <div>
                     <CourseStatus courseDetails={courseDetails} />
-                    <UpgradeToPro />
+                    {!hasUnlimitedAccess && (<UpgradeToPro />)}
                     <CommunityHelp />
                 </div>
             </div>

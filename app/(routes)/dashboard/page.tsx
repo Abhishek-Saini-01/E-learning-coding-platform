@@ -1,4 +1,4 @@
-import React from 'react'
+"use client";
 import WelcomeBanner from './_components/WelcomeBanner'
 import EnrolledCourses from './_components/EnrolledCourses'
 import ExploreMore from './_components/ExploreMore'
@@ -6,8 +6,11 @@ import InviteFriend from './_components/InviteFriend'
 import UserStatus from './_components/UserStatus'
 import UpgradeToPro from './_components/UpgradeToPro'
 import ExploreMoreCourse from './_components/ExploreMoreCourse'
+import { useAuth } from '@clerk/nextjs';
 
 const Dashboard = () => {
+    const { has } = useAuth();
+    const hasUnlimitedAccess = has && has({ plan: "unlimited" })
     return (
         <div className='p-10 md:px-20 lg:px-36 xl:px-48'>
             <div className='grid grid-cols-3 gap-7'>
@@ -20,7 +23,7 @@ const Dashboard = () => {
                 </div>
                 <div>
                     <UserStatus />
-                    <UpgradeToPro />
+                    {!hasUnlimitedAccess && (<UpgradeToPro />)}
                 </div>
 
             </div>
